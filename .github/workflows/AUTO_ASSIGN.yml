@@ -1,4 +1,4 @@
-name: Automatically assign peoples to features and bugs issues and PR
+name: Automatically assign peoples to issues and PR
 
 on:
   issues:
@@ -7,23 +7,20 @@ on:
     types: [opened]
 
 jobs:
-  feature-assign-people:
-    name: Auto assign people to feature issues and PR
+  assign-people-issue-pr:
+    name: Auto assign people to issue/PR
     runs-on: ubuntu-latest
     steps:
       - uses: wow-actions/auto-assign@v2.1.0
+        name: 📝 Feature Assignment
         with:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
           addAssignees: author
           skipKeywords: draft
-          includeLabels: 📝 Functionnality
+          includeLabels: 📝 Feature
 
-
-  bug-assign-people:
-    name: Auto assign people to bug issues and PR
-    runs-on: ubuntu-latest
-    steps:
       - uses: wow-actions/auto-assign@v2.1.0
+        name: 🪲 Bug Assignment
         with:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
           addAssignees: true

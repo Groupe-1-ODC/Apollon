@@ -1,4 +1,4 @@
-name: Automatically add features and bugs issues to our projects boards
+name: Automatically add issues to our projects boards
 
 on:
   issues:
@@ -6,21 +6,18 @@ on:
       - labeled
 
 jobs:
-  add-feature-to-project:
-    name: Add feature issue to project
+  add-to-project:
+    name: Add issue to project board
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@main
+      - uses: actions/add-to-project@v0.4.0
+        name: 📝 Feature Project Management
         with:
           project-url: https://github.com/orgs/Groupe-1-ODC/projects/4
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: 📝 Functionnality
-
-  add-bug-to-project:
-    name: Add bug issue to project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/add-to-project@main
+          labeled: 📝 Feature
+      - uses: actions/add-to-project@v0.4.0
+        name: 🪲 Bug Project Management
         with:
           project-url: https://github.com/orgs/Groupe-1-ODC/projects/5
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
