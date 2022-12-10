@@ -1,0 +1,27 @@
+name: Automatically add features and bugs issues to our projects boards
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  add-feature-to-project:
+    name: Add feature issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/Groupe-1-ODC/projects/4
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 📝 Functionnality
+
+  add-bug-to-project:
+    name: Add bug issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/Groupe-1-ODC/projects/5
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🪲 Bug

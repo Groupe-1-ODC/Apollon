@@ -1,0 +1,49 @@
+{
+    "private": true,
+    "type": "commonjs",
+    "name": "@dynamored/everybook",
+    "description": "Main API for Everybook services",
+    "version": "beta-1.0.0",
+    "homepage": "https://github.com/Groupe-1-ODC/Apollon/README.md",
+    "license": "GPL-3.0",
+    "main": "./src/app",
+    "packageManager": "npm@8.0.0",
+	"scripts": {
+        "start": "ts-node src/app.ts",
+		"test": "testyts",
+        "production": "docker compose up"
+    },
+    "bugs": {
+        "url": "https://github.com/Groupe-1-ODC/Apollon/issues",
+        "email": "team@dynamored.com"
+    },
+    "contributors": [
+		{
+			"name": "Raphael",
+			"url": "https://dynamored.com",
+			"email": "raphael@dynamored.com"
+		},
+		{
+			"name": "Maram",
+			"email": ""
+		},
+		{
+			"name": "Corentin",
+			"email": ""
+		}
+	],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Groupe-1-ODC/Apollon.git"
+    },
+    "engines": {
+        "node": ">=16.10",
+        "npm": ">=8.0.0"
+    },
+    "directories": {
+        "lib": "./libs",
+        "doc": "./docs",
+        "test": "./src/specs",
+        "src": "./src"
+    }
+}
