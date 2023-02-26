@@ -8,9 +8,9 @@
     "license": "GPL-3.0",
     "main": "./src/app",
     "packageManager": "npm@8.0.0",
-	"scripts": {
-        "start": "ts-node src/app.ts",
-		"test": "testyts",
+    "scripts": {
+        "start": "nodemon --exec ts-node src/app.ts",
+        "test": "testyts",
         "production": "docker compose up"
     },
     "bugs": {
@@ -18,20 +18,20 @@
         "email": "team@dynamored.com"
     },
     "contributors": [
-		{
-			"name": "Raphael",
-			"url": "https://dynamored.com",
-			"email": "raphael@dynamored.com"
-		},
-		{
-			"name": "Maram",
-			"email": "zitouni.maram20@gmail.com"
-		},
-		{
-			"name": "Corentin",
-			"email": "corentin.lechene.pro@gmail.com"
-		}
-	],
+        {
+            "name": "Raphael",
+            "url": "https://dynamored.com",
+            "email": "raphael@dynamored.com"
+        },
+        {
+            "name": "Maram",
+            "email": "zitouni.maram20@gmail.com"
+        },
+        {
+            "name": "Corentin",
+            "email": "corentin.lechene.pro@gmail.com"
+        }
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/Groupe-1-ODC/Apollon.git"
@@ -45,5 +45,14 @@
         "doc": "./docs",
         "test": "./src/specs",
         "src": "./src"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "nodemon": "^2.0.20"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.17",
+        "@types/node": "^18.14.1",
+        "express": "^4.18.2"
     }
 }
