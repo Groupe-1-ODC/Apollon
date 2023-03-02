@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.route('/books')
-	// .get((req: Request, res: Response) => controllers.fetchBooks(req, res) )
+	.get((req: Request, res: Response) => controllers.fetchBooks(req, res) )
 	.post((req: Request, res: Response) => controllers.createBook(req, res) )
 
 router.route('/books/:book_id')
