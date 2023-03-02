@@ -36,4 +36,8 @@ export default class Book {
 	static async fetchAll() {
 		return await db.query('SELECT * from books');
 	}
+
+	static async fetchById(id: number|string) {
+		return await db.query('SELECT * from books WHERE book_id = $1', [id]);
+	}
 }

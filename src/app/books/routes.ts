@@ -12,7 +12,7 @@ router.route('/books')
 	.post((req: Request, res: Response) => controllers.createBook(req, res) )
 
 router.route('/books/:book_id')
-	// .get((req: Request, res: Response) => controllers.fetchBook(req, res) )
+	.get((req: Request, res: Response) => controllers.fetchBook(req, res) )
 	// .patch((req: Request, res: Response) => controllers.updateBook(req, res) )
 	// .delete((req: Request, res: Response) => controllers.deleteBook(req, res) )
 
