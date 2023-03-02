@@ -32,4 +32,8 @@ export default class Book {
 			return {rows: [], rowCount: 0};
 		}
 	}
+
+	static async fetchAll() {
+		return await db.query('SELECT * from books');
+	}
 }

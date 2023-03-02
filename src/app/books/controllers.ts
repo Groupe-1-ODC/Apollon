@@ -17,7 +17,18 @@ const createBook = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const fetchBooks = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const books = await Book.fetchAll();
+
+		Responses.Custom(res, books.rows);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
 
 module.exports = {
 	createBook,
+	fetchBooks,
 }
