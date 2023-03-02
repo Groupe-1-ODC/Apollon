@@ -40,8 +40,25 @@ const fetchBook = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const deleteBook = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {book_id} = req.params;
+		const query = await Book.deleteById(book_id);
+
+		if(query.rowCount === 0) {
+			Responses.NotFound(res);
+			return;
+		}
+		Responses.OK(res);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
 module.exports = {
 	createBook,
 	fetchBooks,
 	fetchBook,
+	deleteBook,
 }

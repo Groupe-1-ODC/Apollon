@@ -40,4 +40,13 @@ export default class Book {
 	static async fetchById(id: number|string) {
 		return await db.query('SELECT * from books WHERE book_id = $1', [id]);
 	}
+
+	static async deleteById(id: number|string) {
+		try {
+			return await db.query('DELETE FROM books WHERE book_id = $1', [id]);
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
+	}
 }
