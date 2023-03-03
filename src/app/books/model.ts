@@ -41,6 +41,10 @@ export default class Book {
 		return await db.query('SELECT * from books WHERE book_id = $1', [id]);
 	}
 
+	static async fetchByIsbn(isbn: number|string) {
+		return await db.query('SELECT * from books WHERE isbn = $1', [isbn]);
+	}
+
 	static async deleteById(id: number|string) {
 		try {
 			return await db.query('DELETE FROM books WHERE book_id = $1', [id]);

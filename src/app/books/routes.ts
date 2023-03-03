@@ -16,5 +16,7 @@ router.route('/books/:book_id')
 	// .patch((req: Request, res: Response) => controllers.updateBook(req, res) )
 	.delete((req: Request, res: Response) => controllers.deleteBook(req, res) )
 
+router.route('/books/isbn/:isbn')
+	.get((req: Request, res: Response) => controllers.fetchBookByIsbn(req, res) )
 
 module.exports = router;
