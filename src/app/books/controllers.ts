@@ -40,6 +40,18 @@ const fetchBook = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const fetchBookByIsbn = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {isbn} = req.params;
+		const book = await Book.fetchByIsbn(isbn);
+
+		Responses.Custom(res, book.rows);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
 const deleteBook = async (req: Request, res: Response ): Promise<void> => {
 	try {
 		const {book_id} = req.params;
@@ -60,5 +72,6 @@ module.exports = {
 	createBook,
 	fetchBooks,
 	fetchBook,
+	fetchBookByIsbn,
 	deleteBook,
 }
