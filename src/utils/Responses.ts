@@ -10,8 +10,12 @@ export default class Responses {
 		res.status(status).send(body);
 	}
 
+	static NotFound(res: Response): void {
+		res.status(404).send({message: "Not Found"});
+	}
+
 	static Unauthorized(res: Response): void {
-		res.status(401).send({message: "unauthorized"});
+		res.status(401).send({message: "Unauthorized"});
 	}
 
 	static ErrorUnknown(res: Response): void {
