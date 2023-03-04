@@ -6,6 +6,7 @@ import Lib from "../libs/model";
 require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
+const sha512 = require('js-sha512')
 
 
 const createUser = async (req: Request, res: Response ): Promise<void> => {
@@ -17,13 +18,14 @@ const createUser = async (req: Request, res: Response ): Promise<void> => {
 			return Responses.BadRequest(res);
 		}
 
+		const passwordHash = sha512(password);
 		const token: string = jwt.sign({ email }, process.env.JWT_PRIVATE_KEY);
 
 		const lib = new Lib("My books");
 		const lib_query = await lib.insert();
 		const lib_id: number = lib_query.rows[0].lib_id;
 
-		const user: User = new User(token, email, password, firstname, lastname, lib_id);
+		const user: User = new User(token, email, passwordHash, firstname, lastname, lib_id);
 		const user_query = await user.insert();
 
 		Responses.Custom(res, user_query.rows, 201);
