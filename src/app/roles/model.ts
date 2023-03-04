@@ -1,10 +1,7 @@
 const { db } = require("../../utils/PostgreSql");
 
 export default class Role {
-	// public lib_id: number;
 	public name: string;
-	// public updated_at: Date;
-	// public created_at: Date;
 
 	constructor(name: string) {
 		this.name = name;
