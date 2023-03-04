@@ -29,10 +29,6 @@ export default class Role {
 		return await db.query("SELECT * from roles WHERE role_id = $1", [id]);
 	}
 
-	static async fetchByIsbn(isbn: number | string) {
-		return await db.query("SELECT * from roles WHERE isbn = $1", [isbn]);
-	}
-
 	static async deleteById(id: number | string) {
 		try {
 			return await db.query("DELETE FROM roles WHERE role_id = $1", [id]);

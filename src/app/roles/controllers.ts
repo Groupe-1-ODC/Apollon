@@ -38,18 +38,6 @@ const fetchRole = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-const fetchRoleByIsbn = async (req: Request, res: Response): Promise<void> => {
-	try {
-		const { isbn } = req.params;
-		const role = await Role.fetchByIsbn(isbn);
-
-		Responses.Custom(res, role.rows);
-	} catch (err) {
-		console.error(err);
-		Responses.ErrorUnknown(res);
-	}
-};
-
 const deleteRole = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const { role_id } = req.params;
@@ -69,7 +57,6 @@ const deleteRole = async (req: Request, res: Response): Promise<void> => {
 module.exports = {
 	createRole,
 	deleteRole,
-	fetchRoleByIsbn,
 	fetchRole,
 	fetchRoles,
 };
