@@ -10,10 +10,10 @@ export default class Lib {
 		this.name = name;
 	}
 
-	async insert(): Promise<{rows: [], rowCount: number}> {
+	async insert(): Promise<any> {
 		try {
 			return await db.query(
-				'INSERT INTO libs (name, updated_at, created_at) VALUES ($1, NOW(), NOW()) RETURNING id',
+				'INSERT INTO libs (name, updated_at, created_at) VALUES ($1, NOW(), NOW()) RETURNING lib_id',
 				[this.name]
 			);
 		} catch (err) {
