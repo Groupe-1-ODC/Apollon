@@ -103,6 +103,25 @@ const fetchUserBooks = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const fetchUserBooksRead = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {user_id, lib_id} = req.params;
+		const user = await User.fetchById(user_id);
+		const books = await User.fetchBooksByLibId(lib_id);
+
+		if(Object.keys(books.rows[0]).length === 0) {
+			return Responses.BadRequest(res);
+		}
+
+		const booksRead = books.rows.filter((book: {read: boolean}) => book.read === true);
+
+		Responses.Custom(res, booksRead);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
 const addBookToLib = async (req: Request, res: Response ): Promise<void> => {
 	try {
 		const {user_id, lib_id} = req.params;
@@ -140,6 +159,7 @@ module.exports = {
 	fetchUserByEmail,
 	deleteUser,
 	fetchUserBooks,
+	fetchUserBooksRead,
 	addBookToLib,
 	removeBookToLib,
 }
