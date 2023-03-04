@@ -41,8 +41,14 @@ export default class User {
 		return await db.query('SELECT * from users WHERE user_id = $1', [id]);
 	}
 
-	static async fetchByEmail(email: string) {
-		return await db.query('SELECT * from users WHERE email = $1', [email]);
+	static async fetchByEmail(email: string): Promise<object | undefined> {
+		try {
+			const query = await db.query('SELECT * from users WHERE email = $1', [email]);
+			return query?.rows[0];
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
 	}
 
 	static async deleteById(id: number|string) {

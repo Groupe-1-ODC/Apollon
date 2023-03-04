@@ -12,6 +12,11 @@ const createUser = async (req: Request, res: Response ): Promise<void> => {
 	try {
 		const {email, password, firstname, lastname} = req.body;
 
+		const userExist = await User.fetchByEmail(email);
+		if(userExist !== undefined) {
+			return Responses.BadRequest(res);
+		}
+
 		const token: string = jwt.sign({ email }, process.env.JWT_PRIVATE_KEY);
 
 		const lib = new Lib("My books");
@@ -56,7 +61,11 @@ const fetchUserByEmail = async (req: Request, res: Response ): Promise<void> => 
 		const {email} = req.params;
 		const user = await User.fetchByEmail(email);
 
-		Responses.Custom(res, user.rows);
+		if(user === undefined) {
+			return Responses.BadRequest(res);
+		}
+
+		Responses.Custom(res, user);
 	} catch (err) {
 		console.error(err)
 		Responses.ErrorUnknown(res);
