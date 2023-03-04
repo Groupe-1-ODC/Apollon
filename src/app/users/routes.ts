@@ -17,4 +17,12 @@ router.route('/users/:user_id')
 	.delete((req: Request, res: Response) => controllers.deleteUser(req, res) )
 
 
+router.route('/users/:user_id/libs/:lib_id/books')
+	.get((req: Request, res: Response) => controllers.fetchUserBooks(req, res) )
+	.post((req: Request, res: Response) => controllers.addBookToLib(req, res) )
+
+
+router.route('/users/:user_id/libs/:lib_id/books/:book_id')
+	.delete(async (req: Request, res: Response) => controllers.removeBookToLib(req, res) )
+
 module.exports = router;

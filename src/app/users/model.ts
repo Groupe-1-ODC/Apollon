@@ -53,4 +53,29 @@ export default class User {
 			throw err;
 		}
 	}
+
+	static async fetchBooksByLibId(lib_id: number|string) {
+		return await db.query(
+			'SELECT *\n' +
+			'FROM books_libs\n' +
+			'         inner join books b on b.book_id = books_libs.book_id\n' +
+			'         inner join libs l on l.lib_id = books_libs.lib_id\n' +
+			'WHERE l.lib_id = $1',
+			[lib_id]
+		);
+	}
+
+	static async addBook(book_id: number|string, lib_id: number|string) {
+		return await db.query(
+			'INSERT INTO books_libs (book_id, lib_id) VALUES ($1, $2)',
+			[book_id, lib_id]
+		)
+	}
+
+	static async removeBook(book_id: number|string, lib_id: number|string) {
+		return await db.query(
+			'DELETE FROM books_libs WHERE book_id = $1 AND lib_id = $2',
+			[book_id, lib_id]
+		)
+	}
 }
