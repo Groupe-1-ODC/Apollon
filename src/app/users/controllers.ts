@@ -136,6 +136,19 @@ const addBookToLib = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const updateBookToLib = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {user_id, lib_id, book_id} = req.params;
+		const user = await User.fetchById(user_id);
+		const query = User.updateBook(book_id, lib_id);
+
+		Responses.OK(res);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
 const removeBookToLib = async (req: Request, res: Response ): Promise<void> => {
 	try {
 		const {user_id, lib_id, book_id} = req.params;
@@ -161,5 +174,6 @@ module.exports = {
 	fetchUserBooks,
 	fetchUserBooksRead,
 	addBookToLib,
+	updateBookToLib,
 	removeBookToLib,
 }

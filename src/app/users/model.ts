@@ -78,6 +78,13 @@ export default class User {
 		)
 	}
 
+	static async updateBook(book_id: number|string, lib_id: number|string) {
+		return await db.query(
+			'UPDATE books_libs SET read = true WHERE book_id = $1 AND lib_id = $2',
+			[book_id, lib_id]
+		)
+	}
+
 	static async removeBook(book_id: number|string, lib_id: number|string) {
 		return await db.query(
 			'DELETE FROM books_libs WHERE book_id = $1 AND lib_id = $2',
