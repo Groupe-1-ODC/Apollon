@@ -3,10 +3,16 @@ import User from "./model";
 import {Request, Response} from "express";
 import Lib from "../libs/model";
 
+require('dotenv').config();
+
+const jwt = require('jsonwebtoken');
+
 
 const createUser = async (req: Request, res: Response ): Promise<void> => {
 	try {
-		const {token, email, password, firstname, lastname} = req.body;
+		const {email, password, firstname, lastname} = req.body;
+
+		const token: string = jwt.sign({ email }, process.env.JWT_PRIVATE_KEY);
 
 		const lib = new Lib("My books");
 		const lib_query = await lib.insert();
