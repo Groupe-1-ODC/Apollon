@@ -10,6 +10,10 @@ export default class Responses {
 		res.status(status).send(body);
 	}
 
+	static BadRequest(res: Response): void {
+		res.status(400).send({message: "Bad Request"});
+	}
+
 	static NotFound(res: Response): void {
 		res.status(404).send({message: "Not Found"});
 	}
