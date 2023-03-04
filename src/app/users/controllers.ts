@@ -73,7 +73,48 @@ const deleteUser = async (req: Request, res: Response ): Promise<void> => {
 	}
 }
 
+const fetchUserBooks = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {user_id, lib_id} = req.params;
+		const user = await User.fetchById(user_id);
+		const books = await User.fetchBooksByLibId(lib_id)
 
+		Responses.Custom(res, books.rows);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
+const addBookToLib = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {user_id, lib_id} = req.params;
+		const {book_id} = req.body;
+		const user = await User.fetchById(user_id);
+		const books = await User.addBook(book_id, lib_id)
+
+		Responses.OK(res);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
+
+const removeBookToLib = async (req: Request, res: Response ): Promise<void> => {
+	try {
+		const {user_id, lib_id, book_id} = req.params;
+		const query = await User.removeBook(book_id, lib_id);
+
+		if(query.rowCount === 0) {
+			Responses.NotFound(res);
+			return;
+		}
+		Responses.OK(res);
+	} catch (err) {
+		console.error(err)
+		Responses.ErrorUnknown(res);
+	}
+}
 
 module.exports = {
 	createUser,
@@ -81,4 +122,7 @@ module.exports = {
 	fetchUser,
 	fetchUserByEmail,
 	deleteUser,
+	fetchUserBooks,
+	addBookToLib,
+	removeBookToLib,
 }
