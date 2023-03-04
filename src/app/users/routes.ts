@@ -26,6 +26,7 @@ router.route('/users/:user_id/libs/:lib_id/books/read')
 
 
 router.route('/users/:user_id/libs/:lib_id/books/:book_id')
+	.patch((req: Request, res: Response) => controllers.updateBookToLib(req, res) )
 	.delete(async (req: Request, res: Response) => controllers.removeBookToLib(req, res) )
 
 module.exports = router;
