@@ -1,7 +1,8 @@
 import {Express} from "express";
 
-const RouterLib = require('./libs/routes');
-const RouterBook = require('./books/routes');
+const RouterLib = require("./libs/routes");
+const RouterBook = require("./books/routes");
+const RouterRole = require("./books/roles");
 const RouterUser = require('./users/routes');
 
 export default class Routers {
@@ -9,5 +10,6 @@ export default class Routers {
 		app.use(RouterLib);
 		app.use(RouterBook);
 		app.use(RouterUser);
+		app.use(RouterRole);
 	}
 }
