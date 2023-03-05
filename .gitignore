@@ -16,6 +16,9 @@
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
+### Docker databases ###
+db
+
 ### macOS ###
 # General
 .DS_Store
