@@ -9,7 +9,7 @@
     "main": "./src/app",
     "packageManager": "npm@8.0.0",
     "scripts": {
-        "start": "nodemon --exec ts-node src/app.ts",
+        "start": "ts-node src/app.ts",
         "test": "testyts",
         "production": "docker compose up"
     },
