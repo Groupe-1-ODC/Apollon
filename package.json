@@ -11,7 +11,7 @@
     "scripts": {
         "start": "ts-node src/app.ts",
         "test": "testyts",
-        "production": "docker compose up"
+        "production": "docker build ."
     },
     "bugs": {
         "url": "https://github.com/Groupe-1-ODC/Apollon/issues",
