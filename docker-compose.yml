@@ -3,24 +3,26 @@ version: '3.7'
 services:
     postgresql:
         container_name: postgresql
+        restart: always
         image: postgres:latest
         ports:
-            - "5432:5432"
+            - 5432:5432
         volumes:
-            - data-postgresql:/var/lib/postgresql
+            - ./db:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=project-docker
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=admin
+
     api_docker:
-        #        restart: always
+        container_name: dockerized_api
+        restart: always
         build:
             context: .
             dockerfile: Dockerfile
             target: base
-        container_name: app_docker
         ports:
-            - "3000:3000"
+            - 3000:3000
         command: npm run start
         env_file: .env
         environment:
@@ -31,5 +33,5 @@ services:
             PG_PORT: 5432
 
 volumes:
-    data-postgresql:
+    db:
         external: true
