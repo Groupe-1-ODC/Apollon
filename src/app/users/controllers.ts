@@ -8,6 +8,11 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 const sha512 = require("js-sha512");
+const emailValidator = require("deep-email-validator");
+
+const isEmailValid = async (email: string) => {
+	return emailValidator.validate(email);
+};
 
 const createUser = async (req: Request, res: Response): Promise<void> => {
 	try {
@@ -16,6 +21,12 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 		const userExist = await User.fetchByEmail(email);
 		if (userExist !== undefined) {
 			return Responses.BadRequest(res);
+		}
+
+		const valid = await isEmailValid(email);
+
+		if (!valid) {
+			return Responses.WrongEmail(res);
 		}
 
 		const passwordHash = sha512(password);
